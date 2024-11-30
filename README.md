@@ -42,6 +42,7 @@ Ensure that you have the following tools installed before proceeding:
    ```bash
    npm install
    ``` 
+4. Fill the required .env on packages/backend and packages/frontend
 
 ## Firebase Functions Emulator Setup
 To emulate Firebase services locally:

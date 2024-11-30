@@ -3,9 +3,28 @@
   "ui": "tui",
   "tasks": {
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["build:backend", "build:frontend", "build:shared"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".next/**", "!.next/cache/**"]
+    },
+    "serve": {
+      "dependsOn": [ "serve:backend", "serve:frontend"]
+    },
+    "build:backend": {
+      "inputs": ["packages/backend/**"],
+      "outputs": ["packages/backend/dist/**"]
+    },
+    "build:frontend": {
+      "inputs": ["packages/frontend/**"],
+      "outputs": [".next/**"]
+    },
+    "serve:backend": {
+      "inputs": ["packages/backend/**"],
+      "outputs": ["packages/backend/dist/**"]
+    },
+    "serve:frontend": {
+      "inputs": ["packages/frontend/**"],
+      "outputs": [".next/**"]
     },
     "lint": {
       "dependsOn": ["^lint"]

@@ -5,7 +5,8 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "serve": "turbo serve"
   },
   "devDependencies": {
     "prettier": "^3.2.5",
@@ -17,7 +18,6 @@
   },
   "packageManager": "npm@10.2.3",
   "workspaces": [
-    "apps/*",
     "packages/*"
   ]
 }

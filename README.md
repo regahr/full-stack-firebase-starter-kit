@@ -1,81 +1,115 @@
-# Turborepo starter
+# Full-Stack Firebase Starter Kit
 
-This is an official starter Turborepo.
+This project is a full-stack application built using Firebase, Turborepo, Express, Next.js and MUI. It features Firebase Authentication, Firestore database, and a monorepo structure for managing frontend and backend code efficiently.
 
-## Using this example
+## Table of Contents
 
-Run the following command:
+1. [Pre-requirements](#pre-requirements)
+2. [Installation](#installation)
+3. [Firebase Functions Emulator Setup](#firebase-functions-emulator-setup)
+4. [Running the Project](#running-the-project)
+5. [Firebase Integration](#firebase-integration)
+   - [Backend Functions](#backend-functions)
+   - [Firestore Database](#firestore-database)
+   - [Frontend Integration](#frontend-integration)
+6. [Key Pages](#key-pages)
+7. [Tech Stack Overview](#tech-stack-overview)
+8. [Further Information](#further-information)
+---
 
-```sh
-npx create-turbo@latest
+## Pre-requirements
+
+Ensure that you have the following tools installed before proceeding:
+
+- **Firebase CLI**  
+  If Firebase CLI is not installed, you can install it using the following command:
+  ```bash
+  npm install -g firebase-tools
+  ```
+- **Node.js** and **npm** must be installed
+
+## Installation
+
+1. Clone the repository to your local machine:
+   ```bash
+   git clone git@github.com:regahr/full-stack-firebase-starter-kit.git
+   ```
+2. Navigate to the root directory of the project:
+   ```bash
+   cd full-stack-firebase-starter-kit
+   ```   
+3. Install dependencies
+   ```bash
+   npm install
+   ``` 
+
+## Firebase Functions Emulator Setup
+To emulate Firebase services locally:
+1. Initialize the emulator:
+   ```bash
+   firebase init emulators
+   ```
+2. Choose Functions Emulator
+3. Start the emulator:
+   ```bash
+   firebase emulators:start --only functions
+   ```
+
+## Running the Project
+To start the project, you can choose one of the following methods:
+
+### Method 1: Using a Single Command
+```bash
+npm run serve
 ```
 
-## What's inside?
-
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
+### Method 2: Running Backend and Frontend Separately
+```bash
+cd packages/backend
+npm run build
+firebase emulators:start --only functions
 ```
 
-### Develop
+## Firebase Integration
+This project integrates Firebase for authentication, deployment, and data storage using Firestore.
 
-To develop all apps and packages, run the following command:
+### Backend Functions
+Firebase Cloud Functions handle server-side logic such as:
+- Token validation
+- User data management
+- API interactions
+- Firestore operations
 
-```
-cd my-turborepo
-pnpm dev
-```
 
-### Remote Caching
+### Firestore Database
+Backend: Uses Firestore to store and retrieve user information, ensuring data consistency and integrity.
 
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+### Frontend Integration
+Firebase Authentication: Handles user login, registration, and session management. The authentication state is stored persistently using Redux for seamless user experience across sessions.
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
+## Key Pages
+- `/` (Login Page):
+   - Integrated with Firebase Auth, the database, and Redux for persistent authentication. 
+   - Handles user login and ensures the session state is available throughout the application.
+- `/home` Page:
+   - Displays authentication and Firestore data using Redux and Firebase Auth.
+   - Fetches and displays user information from Firestore.
+- `/update-user` Page:
+   - Updates user data via backend API calls to persists changes in Firestore.
+   - Uses Redux to update the browser cache.
+- `/sign-up` Page:
+   - Handles user registration using Firebase Auth.
+   - Manages tokens and user data persistently with Redux.
 
-```
-cd my-turborepo
-npx turbo login
-```
+## Tech Stack Overview
+- Frontend: Next.js 14 with MUI (Material-UI) for UI components.
+- Backend: Express.js running on Firebase Functions.
+- Database: Firebase Firestore for data storage.
+- Monorepo Management: Turborepo for efficient multi-package handling.
+- State Management: Redux for state persistence and management.
+- Authentication: Firebase Auth integrated across the app.
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+## Further Information
+- Firebase Integration: Full backend and frontend support with Firebase for authentication, data management, and serverless functions.
+- TurboRepo: Efficiently manages monorepo dependencies and builds.
+- Express.js: Serves as the backend API handler within Firebase Functions.
